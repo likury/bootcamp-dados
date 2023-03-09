@@ -42,6 +42,14 @@ Uma vez criada a stack podemos executá-la:
 ```docker stack deploy -c docker-stack.yml vote```
 
 
+Como criar arquivos no terminal:
+
+touch stack.yml
+sudo vim stack.yml
+apertar I(modo insert)
+colar yml no vim
+sair e salvar - [esc]:wq
+
 
 
 Entrega: enviar .yml pro email lucas.sepeda@ada.tech com assunto [SWARM-STACK]
