@@ -13,7 +13,7 @@ Nossa aplicação será composta dos seguintes serviços:
 
 As imagens são as seguintes:
 
-- redis: postgres:15-alpine.
+- redis: redis:alpine
 - db: postgres:15-alpine
 - vote: dockersamples/examplevotingapp_vote
 - result: dockersamples/examplevotingapp_result
@@ -39,4 +39,9 @@ POSTGRES_PASSWORD: "postgres"
 
 Uma vez criada a stack podemos executá-la:
 
-```docker stack deploy -c docker-stack.yml vot```
+```docker stack deploy -c docker-stack.yml vote```
+
+
+
+
+Entrega: enviar .yml pro email lucas.sepeda@ada.tech com assunto [SWARM-STACK]
