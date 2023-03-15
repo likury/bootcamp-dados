@@ -10,3 +10,8 @@ Variáveis de ambiente necessárias:
 #ME_CONFIG_MONGODB_SERVER       <- Tirado ConfigMap
 #
 #A porta é a 8081
+
+valueFrom:
+  configMapKeyRef:
+    name: mongodb-configmap
+    key: database_url
