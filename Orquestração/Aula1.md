@@ -29,7 +29,7 @@ Essencialmente, temos um container rodando em um *pod*, um *pod* roda em um *nod
 ## Rodando K8s localmente
 É possível testar a instalação local do Kubernetes com o seguinte comando:
 
-```kubectl cluester-info```
+```kubectl cluster-info```
 
 Se a instalação estiver correta, a seguinte mensagem é exibida:
 
@@ -38,6 +38,8 @@ Se a instalação estiver correta, a seguinte mensagem é exibida:
 ## K8s API 
 
 A API de server do Kubernetes é um serviço rodando no node *master*. Ela expõe uma API REST que é o único ponto de comunicação com os clusters de Kubernetes. Assim como no Docker, declaramos em um arquivo .YML o estado desejado do nosso sistema e mandamos essas informações para o cluster por meio da API REST.
+
+Para ler mais sobre API REST: https://www.redhat.com/pt-br/topics/api/what-is-a-rest-api
 
 Outras aplicações como Dashboards de monitoriamento também se comunicam com a API para obter informações. 
 
@@ -55,6 +57,13 @@ As configurações para a CLI são guardadas em **${HOME}/.kube/config**
 Um *context* é um grupo de parâmetro de acessos a um cluster de K8s. Geralmente contem um cluster de Kubernetes, um usuário e um namespace.
 
 O *context* atual é o cluster em que o Kubernetes executará os serviços de orquestração. 
+
+Podemos instalar um novo context por meio do minikube usando o seguinte comando:
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
 
 Alguns comandos importantes para contexts:
 
@@ -104,9 +113,10 @@ kubectl run mynginx --image=nginx --port=80
 kubectl create deploy mynginx --image=nginx --port=80 --replicas=3
 kubectl create service nodeport myservice --tagertPort=8080
 kubectl delete pod nginx
+kubectl delete deployment mynginx
 ```
 
-Um exemploc com o mode declarativo no arquivo .YML:
+Um exemplo com o mode declarativo no arquivo .YML:
 
 ```
 apiVersion: v1
@@ -118,7 +128,7 @@ metadata:
     type: front-end
 spec:
   containers:
-    - name: nginx -container
+    - name: nginx-container
     - image: nginx
 ```
 
@@ -189,8 +199,41 @@ Esse componente é o "*controlador de rank mais alto*". Sua função é controla
 
 ## Componente: cloud-control-manager
 Sua função é interagir com os controladores dos provedores de cloud. 
+- Checa se Nodes foram deletados na Cloud depois que param de responder
+- Criar rotas de tráfego de internet
+- Criar, atualizar ou deletar balanceadores de carga
+- Interagir com o serviços de armazenamento: criar, acoplar e montar volumes. 
 
+## Componente: kube-scheduler
+Esse componente monitora Pods recentemente criados que não possuem nenhum Node atrelado e seleciona um Node para que o Pod seja executado. Esse processo é chamado de escalonamento. 
 
+Vários fatores são levados em conta ao selecionar esse Node:
+- Requisitos inviduais e coletivos de recursos
+- Limitações de hardware, software e permissões
+
+## Comenponente: addons
+Além disso, é possível instalar uma série de addons no Crontol Plane como:
+- DNS
+- Dashboards
+- Logging de clusters
+- Monitoramento de containers
+
+Isso conclui os nossos componentes do *master node*.
+
+## Worker Nodes
+Nodes são máquinas virtuais ou físicas. Um grupo de Nodes formam um cluster. Quando um Worker Node é adicionado ao cluster, alguns serviços básicos do Kubernetes são instalados nele:
+
+- container-runtime
+- kubelet
+- kube-proxy
+
+Esses serviços são essenciais para execução do Node e são administrados pelos serviços do Control Plane. 
+
+## Componente: kubelet 
+Os pods passam por algo que chamado  *lifecycle*, por exemplo transitar de *Pending* para *Running*. Esse *lifecyle* é administrado pelo kubelet. Também garante que os containers descritos nas especificações do Pod estejam rodando e estejam *healthy*. 
+
+## Componente: kube-proxy
+É um proxy de rede que administra as regras de rede em cada node. Todo tráfego de rede passa pelo proxy. 
 
 
 

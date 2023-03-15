@@ -1,0 +1,3 @@
+Aplicar os componentes criados em um YML
+
+kubectl apply -f nomedoaqruivo.yml
