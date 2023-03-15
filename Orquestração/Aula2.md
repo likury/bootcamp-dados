@@ -4,7 +4,7 @@ Os dois componentes são abstrações do Kubernetes.
 
 ### Deployment
 
-Um *Deployment* é um objeto do cluster que representa um grupo de um conjunto de *Pods* rodando, um grupo lógico que tem propriedades de gerenciamente atreladas a ele. Os *Deployments* possuem a semâtica para o estado desejado de determinado grupo de *Pods*
+Um *Deployment* é um objeto do cluster que representa um grupo de um conjunto de *Pods* rodando, um grupo lógico que tem propriedades de gerenciamento atreladas a ele. Os *Deployments* possuem a semâtica para o estado desejado de determinado grupo de *Pods*
 
 Por exemplo, suponha que é necessário adicionar ao cluster um suporte para análise de métricas de determinados serviços. O time de DevOps cria uma imagem Docker chamada **metrics-analyzer-1.0** que recebe em sua configuração *onde* e *quais* agentes devem ser monitorados, *com que frequência* esses dados devem ser coletados, e *qual endpoint* de cada agente fornece as métricas. 
 

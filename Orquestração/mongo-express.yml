@@ -1,0 +1,12 @@
+apiVersion:
+kind:
+metadata:
+spec:
+
+Variáveis de ambiente necessárias:
+#ME_CONFIG_MONGODB_ADMINUSERNAME <- tirar do secret
+#ME_CONFIG_MONGODB_ADMINPASSWORD 
+#
+#ME_CONFIG_MONGODB_SERVER       <- Tirado ConfigMap
+#
+#A porta é a 8081
