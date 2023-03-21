@@ -52,14 +52,7 @@ chmod +x ./aws-iam-authenticator
 
 Copie o binário para um pasta no $PATH:
 
-```
-mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
-```
 
-Adicione $HOME/bin ao $PATH (provavelmente redundante):
-```
-echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
-```
 
 Teste a instalação:
 
@@ -83,14 +76,21 @@ eksctl create cluster \
 
 ## Fazendo o deploy das aplicações
 
-Vamos fazer o deploy de uma aplicação de teste a partir da imagem ```paulbouwer/hello-kubernetes```. 
+Vamos fazer o deploy de uma aplicação de teste a partir da imagem ```paulbouwer/hello-kubernetes:1.5```. 
 
 Exercício: 
 
 - Criar um Deployment para uma aplicação chamada **hello-kubernetes**. 
 
-- Vamos criar um deployment com 3 pods para *high avalability*. 
+- Vamos criar um deployment com 3 pods para *high avalability*. A porta no container é a porta 8080 
 
 - Criar um service do tipo *LoadBalancer*.
 
+Entrega do YML: lucas.sepeda@ada.tech - Assunto: [KUBERNETES - EKS]
 
+## "Pausando" o cluster
+
+```eksctl scale nodegroup --cluster my-cluster --name my-linux-nodes --nodes 0 --nodes-max 1 --nodes-min 0```
+
+## Deletando o cluster
+```eksctl delete cluster --region=sa-east-1 --name=my-cluster```
