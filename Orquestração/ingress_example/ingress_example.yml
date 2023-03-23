@@ -5,7 +5,7 @@ metadata:
   labels:
     app: game1 
 spec:
-  replicas: 2
+  replicas: 1 
   selector:
     matchLabels:
       app: game1 
@@ -40,8 +40,6 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/load-balancer-name: game
     alb.ingress.kubernetes.io/scheme: internet-facing
-
-    alb.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: alb
   rules:
