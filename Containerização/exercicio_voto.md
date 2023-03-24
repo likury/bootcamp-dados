@@ -13,8 +13,8 @@ Nossa aplicação será composta dos seguintes serviços:
 
 As imagens são as seguintes:
 
-- redis: redis:alpine
-- db: postgres:15-alpine
+- redis: redis:alpine -> porta 6379
+- db: postgres:15-alpine -> porta 5432
 - vote: dockersamples/examplevotingapp_vote
 - result: dockersamples/examplevotingapp_result
 - worker: dockersamples/examplevotingapp_worker

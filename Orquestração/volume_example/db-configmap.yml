@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: movies-dbcreation-script
+data:
+  mysql_dbcreation.sql: |-
+    DROP DATABASE IF EXISTS movies;
+    CREATE DATABASE movies;
